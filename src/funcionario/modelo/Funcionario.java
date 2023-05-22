@@ -14,6 +14,10 @@ public class Funcionario {
 		this.idade = idade;
 		this.salario = salario;
 	}
+	
+	public void mostraFuncionario() {
+		System.out.println("");
+	}
 
 	public String getNome() {
 		return nome;
