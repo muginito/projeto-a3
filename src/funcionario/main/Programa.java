@@ -1,36 +1,37 @@
 package funcionario.main;
 
 
-import java.util.ArrayList;
-import java.util.Formatter;
-import java.util.Random;
-import java.util.Scanner;
 
+import java.util.Scanner;
+import funcionario.modelo.CadastroFuncionario;
 import funcionario.modelo.Funcionario;
 
 public class Programa {
 
 	public static void main(String[] args) {
+//		Instanciação de objetos
 		Scanner sc = new Scanner(System.in);
+		CadastroFuncionario cadastro = new CadastroFuncionario();
 		
-		ArrayList<Funcionario> funcionarios = new ArrayList<>();
-		
-		int saida = Integer.MIN_VALUE;
-		
-		//String cpf = rnd.nextInt(9) +
-		
+//		Algoritimo para registrar 7 objetos
 		for (int i = 0; i < 7; i++) {
 			String nome = "f"+i;
 			String ocupacao = "o"+i;
 			
-			funcionarios.add(new Funcionario(nome, ocupacao, Integer.toString(i), i, (double) i));
+			cadastro.registraFuncionario(new Funcionario(nome, ocupacao, Integer.toString(i), i, (double) i));
 		}
 		
-		while (saida != 0) {
-			System.out.println("1- Cadastro de funcionario / 2- Listar funcionarios / 0- Sair");
+		int T = Integer.MIN_VALUE;
+		while (T != 0) {
+			System.out.println("1- Cadastro de funcionario / 2- Listar funcionarios / 3 - Busca por salario / 0- Sair");
 			System.out.println("Insira a opcao: ");
-			saida = sc.nextInt();
-			if (saida == 1) {
+			T = sc.nextInt();
+			
+//			Mensagem de encerramento do sistema
+			if (T == 0) System.out.println("Sistema encerrado.");
+			
+//			Menu de cadstro de funcionario
+			else if (T == 1) {
 				System.out.println("*Castro de funcionario*");
 				System.out.println("Digite o nome do funcionario: ");
 				String nome = sc.next();
@@ -43,16 +44,22 @@ public class Programa {
 				System.out.println("Digite o salario");
 				double salario = sc.nextDouble();
 				
-				funcionarios.add(new Funcionario(nome, ocupacao, cpf, idade, salario));
+				cadastro.registraFuncionario(new Funcionario(nome, ocupacao, cpf, idade, salario));
 				
-			} else if (saida == 2) {
+//			Lista tabular de funcionarios
+			} else if (T == 2) {
 				System.out.println("Lista:\nNome\t\tOcupacao\tSalario");
-				for (int i = 0; i < funcionarios.size(); i++) {
-					Funcionario f = funcionarios.get(i);
+				for (int i = 0; i < cadastro.qntdFuncionarios(); i++) {
+					Funcionario f = cadastro.getFuncionario(i);
 					System.out.println(f.getNome() + "\t\t" + f.getOcupacao() + "\t\t" + f.getSalario());
 				}
-			} else if (saida == 0) System.out.println("Encerrando sistema.");
-			else System.out.println("Valor invalido!");
+				
+//				Sistema de busca
+			} else if (T == 3) {
+				System.out.println("Digite o salario: ");
+				cadastro.busca(sc.nextDouble());
+				
+			} else System.out.println("Valor invalido!");
 		}
 		sc.close();
 	}
