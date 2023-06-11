@@ -1,17 +1,19 @@
 package funcionario.main;
 
-
-
+import java.util.List;
 import java.util.Scanner;
+
+import funcionario.modelo.Admin;
 import funcionario.modelo.CadastroFuncionario;
 import funcionario.modelo.Funcionario;
 
 public class Programa {
 
 	public static void main(String[] args) {
+		
 //		Instanciação de objetos
 		Scanner sc = new Scanner(System.in);
-		CadastroFuncionario cadastro = new CadastroFuncionario();
+		Admin cadastro = new Admin();
 		
 //		Algoritimo para registrar 7 objetos
 		for (int i = 0; i < 7; i++) {
@@ -22,8 +24,10 @@ public class Programa {
 		}
 		
 		int T = Integer.MIN_VALUE;
+		
+//		Loop da interface do sistema
 		while (T != 0) {
-			System.out.println("1- Cadastro de funcionario / 2- Listar funcionarios / 3 - Busca por salario / 0- Sair");
+			System.out.println("1 - Cadastro de funcionario\n2 - Listar funcionarios\n3 - Busca por salario\n4 - Remover funcionario\n0 - Sair");
 			System.out.println("Insira a opcao: ");
 			T = sc.nextInt();
 			
@@ -32,7 +36,7 @@ public class Programa {
 			
 //			Menu de cadstro de funcionario
 			else if (T == 1) {
-				System.out.println("*Castro de funcionario*");
+				System.out.println("\n***Cadastro de funcionario***");
 				System.out.println("Digite o nome do funcionario: ");
 				String nome = sc.next();
 				System.out.println("Digite a ocupacao: ");
@@ -48,18 +52,34 @@ public class Programa {
 				
 //			Lista tabular de funcionarios
 			} else if (T == 2) {
-				System.out.println("Lista:\nNome\t\tOcupacao\tSalario");
-				for (int i = 0; i < cadastro.qntdFuncionarios(); i++) {
-					Funcionario f = cadastro.getFuncionario(i);
+				System.out.println("\n***Lista de funcionarios***\nNome\t\tOcupacao\tSalario");
+				for (Funcionario f : cadastro.getFuncionarios()) {
 					System.out.println(f.getNome() + "\t\t" + f.getOcupacao() + "\t\t" + f.getSalario());
 				}
 				
-//				Sistema de busca
+//			Sistema de busca
 			} else if (T == 3) {
-				System.out.println("Digite o salario: ");
-				cadastro.busca(sc.nextDouble());
+				System.out.println("\nDigite o salario: ");
+				double busca = sc.nextDouble();
+				System.out.println("Nome\tOcupacao\tCPF\tIdade\tSalario");
+				for (Funcionario f : cadastro.busca(busca)) {
+					System.out.println(f);
+				}
+				//System.out.println(cadastro.busca(busca).toString()); 
 				
-			} else System.out.println("Valor invalido!");
+			} else if (T == 4){
+				System.out.println("Digite seu login e senha de administrador");
+				System.out.println("login: ");
+				String login = sc.next();
+				System.out.println("senha: ");
+				String senha = sc.next();
+				if (cadastro.verificaAdmin(login, senha)) {
+					System.out.println("Digite o nome do funcionario à ser removido");
+					cadastro.busca(sc.next());
+					
+				}
+			}
+			else System.out.println("Valor invalido!");
 		}
 		sc.close();
 	}

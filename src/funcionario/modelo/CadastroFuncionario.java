@@ -8,15 +8,24 @@ import java.util.ArrayList;
  * @author mig
  *
  */
-public class CadastroFuncionario {
+public abstract class CadastroFuncionario {
 	
 	/**
 	 * Atributo para a lista de funcionário.
 	 */
 	private ArrayList<Funcionario> funcionarios;
 	
+	/**
+	 * Construtor da classe que instancia a lista {@code funcionarios}.
+	 */
 	public CadastroFuncionario() {
 		funcionarios = new ArrayList<>();
+	}
+	
+	public void listarFuncionarios() {
+		for (Funcionario f : funcionarios) {
+			System.out.println(f);
+		}
 	}
 	
 	/**
@@ -25,7 +34,7 @@ public class CadastroFuncionario {
 	 * @param f funcionário a ser adicionado
 	 */
 	public void registraFuncionario(Funcionario f) {
-		this.funcionarios.add(f);
+		funcionarios.add(f);
 	}
 	
 	/**
@@ -35,7 +44,7 @@ public class CadastroFuncionario {
 	 * @return registro do funcionário na posição indicada
 	 */
 	public Funcionario getFuncionario(int i) {
-		return this.funcionarios.get(i);
+		return funcionarios.get(i);
 	}
 	
 	/**
@@ -53,24 +62,33 @@ public class CadastroFuncionario {
 	 * @return lista de funcionarios
 	 */
 	public ArrayList<Funcionario> getFuncionarios() {
-		return this.funcionarios;
+		return funcionarios;
 	}
 	
 	
 	/**
-	 * Faz uma busca e imprime no console os registros que possuem atributo igual ao parâmetro.
+	 * Faz uma busca e imprime os resultados.
 	 * 
 	 * @param s salario para busca
 	 */
-	public void busca(double s) {
-		int count = 0;
-		System.out.println("Nome\tOcupacao\tCPF\tIdade\tSalario");
+	public ArrayList<Funcionario> busca(double s) {
+		ArrayList<Funcionario> buscaSalario = new ArrayList<>();
 		for(Funcionario f : funcionarios) {
 			if (f.getSalario() == s) {
-				System.out.println(f.toString());
-				count++;
+				buscaSalario.add(f);
 			}
-		} if (count == 0) System.out.println("Nenhum item encontrado.");
+		}
+		return buscaSalario;
+	}
+	
+	public ArrayList<Funcionario> busca(String nome) {
+		ArrayList<Funcionario> buscaNome = new ArrayList<>();
+		for (Funcionario f : funcionarios) {
+			if (f.getNome() == nome) {
+				buscaNome.add(f);
+			}
+		}
+		return buscaNome;
 	}
 	
 }
