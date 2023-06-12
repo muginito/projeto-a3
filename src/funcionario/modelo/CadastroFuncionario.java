@@ -25,7 +25,7 @@ public abstract class CadastroFuncionario implements Comparator<Funcionario> {
 	
 	@Override
 	public int compare(Funcionario o1, Funcionario o2) {
-		return (int) o2.getSalario() - (int) o1.getSalario();
+		return (int) (o2.getSalario() - o1.getSalario());
 	}
 	
 	public void listarFuncionarios() {
@@ -73,9 +73,10 @@ public abstract class CadastroFuncionario implements Comparator<Funcionario> {
 	
 	
 	/**
-	 * Faz uma busca e imprime os resultados.
+	 * Faz uma busca e retorna uma lista.
 	 * 
 	 * @param s salario para busca
+	 * @return buscaSalario
 	 */
 	public ArrayList<Funcionario> busca(double s) {
 		ArrayList<Funcionario> buscaSalario = new ArrayList<>();
@@ -87,6 +88,12 @@ public abstract class CadastroFuncionario implements Comparator<Funcionario> {
 		return buscaSalario;
 	}
 	
+	/**
+	 * Faz uma busca e retorna uma lista.
+	 * 
+	 * @param nome
+	 * @return buscaNome
+	 */
 	public ArrayList<Funcionario> busca(String nome) {
 		ArrayList<Funcionario> buscaNome = new ArrayList<>();
 		for (Funcionario f : funcionarios) {

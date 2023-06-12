@@ -75,8 +75,8 @@ public class Programa {
 					for (Funcionario f : cadastro.busca(busca)) {
 						System.out.println(f);
 					}
-					//System.out.println(cadastro.busca(busca).toString()); 
-					
+			
+//			Remove funcionario
 				} else if (T == 4){
 					System.out.print("Digite o nome do funcionario a ser removido");
 					String rNome = sc.next();
@@ -84,11 +84,18 @@ public class Programa {
 					ArrayList<Funcionario> rLista = cadastro.busca(rNome);
 					for (Funcionario f : rLista) {
 						System.out.println(count + " - " + f.toString());
+						count++;
 					}					
 					System.out.println("Digite o numero para remover: ");
-					cadastro.removeFuncionario(rLista.get(sc.nextInt()));
-					System.out.println("Funcionario removido");
+					Funcionario f = rLista.get(sc.nextInt());
+					System.out.println("Realmente deseja remover " + f + "(S/N)");
 					
+					if (sc.next().compareToIgnoreCase("S") == 0) {
+						cadastro.removeFuncionario(f);						
+						System.out.println("Funcionario removido");
+					} else System.out.println("Retornando ao menu.");
+					
+//			Modifica funcionario	
 				} else if (T == 5) {
 					System.out.println("Digite o nome do funcionario a ser modificado");
 					String mNome = sc.next();
@@ -96,6 +103,7 @@ public class Programa {
 					ArrayList<Funcionario> mLista = cadastro.busca(mNome);
 					for (Funcionario f : mLista) {
 						System.out.println(count + " - " + f.toString());
+						count++;
 					}					
 					
 					System.out.println("Digite o numero para modificar:");
@@ -113,8 +121,7 @@ public class Programa {
 					cadastro.modificaFuncionario(mF, nome, ocupacao, cpf, idade, salario);
 					System.out.println("Funcionario modificado");
 					
-				}
-				else System.out.println("Valor invalido!");
+				} else System.out.println("Valor invalido!");
 			}
 		} else System.out.println("Voce nao tem acesso ao sistema.");
 		sc.close();
