@@ -8,22 +8,20 @@ public class Admin extends CadastroFuncionario {
 	
 	public Admin() {
 		this.login = "admin";
-		this.senha = "1234";
+		this.senha = "senha";
 	}
 	
 	public boolean verificaAdmin(String login, String senha) {
-		if (this.login == login && this.senha == senha) {
+		if (this.login.contentEquals(login) && this.senha.contentEquals(senha)) {
 			return true;
-		}
-		return false;
+		} return false;
 	}
 	
-	public void removeFuncionario(int id) {
-		super.getFuncionarios().remove(id);
+	public void removeFuncionario(Funcionario f) {
+		super.getFuncionarios().remove(f);
 	}
 	
-	public void modificaFuncionario(int id, String nome, String ocupacao, String cpf, int idade, double salario) {
-		Funcionario f = super.getFuncionario(id);
+	public void modificaFuncionario(Funcionario f, String nome, String ocupacao, String cpf, int idade, double salario) {
 		f.setNome(nome);
 		f.setOcupacao(ocupacao);
 		f.setCpf(cpf);
@@ -31,4 +29,11 @@ public class Admin extends CadastroFuncionario {
 		f.setSalario(salario);
 	}
 	
+	public String getLogin() {
+		return login;
+	}
+	
+	public String getSenha() {
+		return senha;
+	}
 }

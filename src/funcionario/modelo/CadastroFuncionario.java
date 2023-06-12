@@ -1,6 +1,7 @@
 package funcionario.modelo;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  * Essa classe tem o objetivo de fazer operações em uma {@code ArrayList<>} simulando um sistema de registro de funcionários.
@@ -8,7 +9,7 @@ import java.util.ArrayList;
  * @author mig
  *
  */
-public abstract class CadastroFuncionario {
+public abstract class CadastroFuncionario implements Comparator<Funcionario> {
 	
 	/**
 	 * Atributo para a lista de funcionário.
@@ -20,6 +21,11 @@ public abstract class CadastroFuncionario {
 	 */
 	public CadastroFuncionario() {
 		funcionarios = new ArrayList<>();
+	}
+	
+	@Override
+	public int compare(Funcionario o1, Funcionario o2) {
+		return (int) o2.getSalario() - (int) o1.getSalario();
 	}
 	
 	public void listarFuncionarios() {
@@ -84,7 +90,7 @@ public abstract class CadastroFuncionario {
 	public ArrayList<Funcionario> busca(String nome) {
 		ArrayList<Funcionario> buscaNome = new ArrayList<>();
 		for (Funcionario f : funcionarios) {
-			if (f.getNome() == nome) {
+			if (f.getNome().compareToIgnoreCase(nome) == 0) {
 				buscaNome.add(f);
 			}
 		}

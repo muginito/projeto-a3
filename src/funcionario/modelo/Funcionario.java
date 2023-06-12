@@ -15,7 +15,7 @@ public class Funcionario {
 	private String ocupacao;
 	private String cpf;
 	private int idade;
-	private double salario;
+	private Double salario;
 	
 	
 	/**
